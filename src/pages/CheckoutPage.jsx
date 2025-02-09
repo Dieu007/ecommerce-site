@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext";
 import { MdCheckCircle } from "react-icons/md";
 
 function CheckoutPage() {
-  const { cart, setCart } = useCart();
+  const { cart } = useCart();
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const navigate = useNavigate();
@@ -13,9 +13,9 @@ function CheckoutPage() {
   const handleConfirmOrder = () => {
     setOrderConfirmed(true);
 
+    // Redirection automatique vers la page de confirmation
     setTimeout(() => {
       setOrderConfirmed(false);
-      setCart([]); // Vider le panier
       navigate("/order-confirmation");
     }, 2000);
   };
@@ -24,6 +24,7 @@ function CheckoutPage() {
     <Container className="mt-4">
       <h1 className="mb-4">Validation de la commande</h1>
 
+      {/* Alerte avec icône animée */}
       {orderConfirmed && (
         <Alert variant="success" className="d-flex align-items-center">
           <MdCheckCircle size={24} className="me-2 text-success" />

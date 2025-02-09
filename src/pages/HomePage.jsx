@@ -1,4 +1,4 @@
-import ProductCard from "../components/ProductCard";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 const products = [
   { id: 1, title: "Produit 1", price: 20, image: "https://via.placeholder.com/150" },
@@ -7,14 +7,24 @@ const products = [
 
 function HomePage() {
   return (
-    <div className="p-4">
-      <h1>Nos Produits</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <Container>
+      <h1 className="my-4">Nos Produits</h1>
+      <Row>
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <Col key={product.id} md={4} className="mb-4">
+            <Card>
+              <Card.Img variant="top" src={product.image} />
+              <Card.Body>
+                <Card.Title>{product.title}</Card.Title>
+                <Card.Text>{product.price}€</Card.Text>
+                <Button variant="primary" className="me-2">Détails</Button>
+                <Button variant="success">Ajouter au panier</Button>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
